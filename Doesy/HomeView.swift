@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct HomeView: View {
     var body: some View {
         ZStack {
             Color("Background")
@@ -54,10 +54,10 @@ struct ContentView: View {
                     Image(systemName: "plus")
                         .font(.title)
                         .padding()
-                        .background(Color("AccentColorBlue"))
+                        .background(Color("OnScreenButton"))
                         .foregroundColor(.white)
                         .clipShape(Circle())
-                        .shadow(color: .blue.opacity(0.3), radius: 10, y: 10)
+                        .shadow(color: Color("OnScreenButton").opacity(0.3), radius: 10, y: 10)
                 }
                 .padding(.trailing)
             }
@@ -84,9 +84,13 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            ContentView()
+            HomeView()
         }
-        .preferredColorScheme(.light)
+        .preferredColorScheme(.dark)
+        
+        NavigationView {
+            HomeView()
+        }
     }
 }
 
