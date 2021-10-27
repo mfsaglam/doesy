@@ -10,7 +10,7 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         ZStack {
-            Color(#colorLiteral(red: 0.9811814427, green: 0.9878709912, blue: 1, alpha: 1))
+            Color("Background")
                 .ignoresSafeArea()
             VStack(alignment: .leading) {
                 Text("CATEGORIES")
@@ -54,7 +54,7 @@ struct ContentView: View {
                     Image(systemName: "plus")
                         .font(.title)
                         .padding()
-                        .background(Color.blue)
+                        .background(Color("AccentColorBlue"))
                         .foregroundColor(.white)
                         .clipShape(Circle())
                         .shadow(color: .blue.opacity(0.3), radius: 10, y: 10)
@@ -86,6 +86,7 @@ struct ContentView_Previews: PreviewProvider {
         NavigationView {
             ContentView()
         }
+        .preferredColorScheme(.light)
     }
 }
 
@@ -106,9 +107,9 @@ struct CardView: View {
                 .overlay(
                     HStack {
                         Capsule(style: .continuous)
-                            .fill(Color(#colorLiteral(red: 0.8735848069, green: 0.2416511774, blue: 0.912528336, alpha: 1)))
+                            .fill(Color("AccentColorPink"))
                             .frame(width: 100)
-                            .shadow(color: Color(#colorLiteral(red: 0.8735848069, green: 0.2416511774, blue: 0.912528336, alpha: 1)).opacity(0.4), radius: 5)
+                            .shadow(color: Color("AccentColorPink").opacity(0.4), radius: 5)
                         Spacer()
                     }
                 )
@@ -117,7 +118,7 @@ struct CardView: View {
         .frame(maxHeight: 80)
         .padding()
         .padding(.vertical, 5)
-        .background(Color.white)
+        .background(Color("Cell"))
         .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
     }
 }
@@ -126,20 +127,21 @@ struct RowView: View {
     var body: some View {
         HStack(alignment: .center) {
             Image(systemName: "circle")
-                .foregroundColor(Color(#colorLiteral(red: 0.8735848069, green: 0.2416511774, blue: 0.912528336, alpha: 1)))
+                .foregroundColor(Color("AccentColorPink"))
                 .font(.title)
             VStack(alignment: .leading) {
                 Text("Daily meeting with team")
+                    .bold()
                     .opacity(0.7)
                 Text("10:30 am")
+                    .foregroundColor(.secondary)
                     .font(.caption)
-                    .opacity(0.4)
             }
             Spacer()
         }
         .padding()
-        .padding(.vertical, 8)
-        .background(Color.white)
-        .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
+        .padding(.vertical, 3)
+        .background(Color("Cell"))
+        .clipShape(RoundedRectangle(cornerRadius: 30, style: .continuous))
     }
 }
