@@ -8,18 +8,25 @@
 import SwiftUI
 
 struct NewTaskView: View {
-    @State var task = ""
+    @State var taskTitle = ""
     @State var color = Color.red
     @State var showDatePicker = false
+    @State var date: Date = .now
+    
+    @FocusState var isFocused: Bool
+    
+    @EnvironmentObject var viewModel: DoeasyViewModel
+    @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
         ZStack {
             Color("Background")
                 .ignoresSafeArea()
             VStack(alignment: .leading) {
-                TextField("Enter new task", text: $task)
+                TextField("Enter new task", text: $taskTitle)
                     .font(.title)
                     .padding()
+                    .focused($isFocused)
                 HStack {
                     HStack {
                         Image(systemName: "calendar")
@@ -51,7 +58,7 @@ struct NewTaskView: View {
                 }
                 
                 if showDatePicker {
-                    DatePicker(selection: .constant(Date()), label: { Text("Date") })
+                    DatePicker(selection: $date, label: { Text("Date") })
                         .datePickerStyle(GraphicalDatePickerStyle())
                 }
                 
@@ -71,32 +78,28 @@ struct NewTaskView: View {
             VStack {
                 HStack {
                     Spacer()
-                    Image(systemName: "xmark")
-                        .font(.title3)
-                        .padding()
-                        .background(
-                            Circle()
-                                .stroke(lineWidth: 2)
-                                .opacity(0.1)
-                        )
-                        .padding(.trailing, 40)
+                    CircularDismissButton()
+                        .onTapGesture {
+                            presentationMode.wrappedValue.dismiss()
+                        }
                 }
                 Spacer()
                 HStack {
                     Spacer()
-                    HStack {
-                        Text("New task")
-                        Image(systemName: "chevron.up")
-                    }
-                    .padding()
-                    .padding(.horizontal, 20)
-                    .foregroundColor(.white)
-                    .background(Color("OnScreenButton"))
-                    .clipShape(RoundedRectangle(cornerRadius: 30, style: .continuous))
-                .shadow(color: Color("OnScreenButton").opacity(0.2), radius: 10, x: 0, y: 20)
+                    OnScreenNewTaskButton()
+                        .shadow(color: Color("OnScreenButton").opacity(0.2), radius: 10, x: 0, y: 20)
+                        .onTapGesture {
+                            let newTask = Task(title: taskTitle, color: "OnScreenButton", time: date)
+                            viewModel.addNewTask(newTask)
+                            presentationMode.wrappedValue.dismiss()
+                        }
                 }
                 .padding(.trailing, 40)
             }
+        }
+        .navigationBarHidden(true)
+        .onAppear {
+            isFocused = true
         }
     }
 }
@@ -106,5 +109,33 @@ struct NewTaskView_Previews: PreviewProvider {
         NewTaskView()
             .preferredColorScheme(.dark)
         NewTaskView()
+    }
+}
+
+struct CircularDismissButton: View {
+    var body: some View {
+        Image(systemName: "xmark")
+            .font(.title3)
+            .padding()
+            .background(
+                Circle()
+                    .stroke(lineWidth: 2)
+                    .opacity(0.1)
+            )
+            .padding(.trailing, 40)
+    }
+}
+
+struct OnScreenNewTaskButton: View {
+    var body: some View {
+        HStack {
+            Text("New task")
+            Image(systemName: "chevron.up")
+        }
+        .padding()
+        .padding(.horizontal, 20)
+        .foregroundColor(.white)
+        .background(Color("OnScreenButton"))
+        .clipShape(RoundedRectangle(cornerRadius: 30, style: .continuous))
     }
 }
