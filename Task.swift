@@ -7,10 +7,10 @@
 
 import Foundation
 
-struct Task: Identifiable {
+struct Task<TaskColor>: Identifiable {
     var id = UUID()
     var title: String
     var done: Bool = false
-    var color: String
+    var color: TaskColor
     var time: Date = Date.now
 }

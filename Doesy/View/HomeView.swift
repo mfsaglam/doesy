@@ -134,12 +134,12 @@ struct CardView: View {
 struct RowView: View {
     var label: String
     var done: Bool
-    var color: String
+    var color: Color
     var hour: String
     var body: some View {
         HStack(alignment: .center) {
             Image(systemName: done ? "checkmark.circle" : "circle")
-                .foregroundColor(done ? Color.secondary : Color(color))
+                .foregroundColor(done ? Color.secondary : color)
                 .font(.title)
             VStack(alignment: .leading) {
                 Text(label)
