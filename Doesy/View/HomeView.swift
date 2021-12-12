@@ -25,7 +25,7 @@ struct HomeView: View {
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 10) {
                             ForEach(0 ..< 5) { item in
-                                CardView()
+                                CategoryRowView(viewModel: viewModel)
                                     .shadow(color: .black.opacity(0.03), radius: 8, x: 0, y: 4)
                             }
                         }
@@ -40,7 +40,7 @@ struct HomeView: View {
                     if viewModel.tasks.count != 0 {
                         List {
                             ForEach(viewModel.tasks) { item in
-                                RowView(label: item.title, done: item.done, color: item.color, hour: viewModel.timeForRow(time: item.time))
+                                TaskRowView(label: item.title, done: item.done, color: item.color, hour: viewModel.timeForRow(time: item.time))
                                     .shadow(color: .black.opacity(0.03), radius: 8, x: 0, y: 4)
                                     .listRowBackground(Color.clear)
                                     .listRowSeparator(.hidden)
@@ -57,7 +57,7 @@ struct HomeView: View {
                         .listStyle(PlainListStyle())
                     } else {
                         VStack{
-                            Text("There is no task for today for this category.")
+                            Text("There is no task today for this category.")
                                 .font(.system(.title3))
                                 .multilineTextAlignment(.center)
                                 .opacity(0.3)
@@ -99,78 +99,6 @@ struct HomeView: View {
             }
         }
         .environmentObject(viewModel)
-    }
-}
-
-struct CardView: View {
-    var body: some View {
-        VStack(alignment: .leading,spacing: 10) {
-            Text("40 tasks")
-                .font(.caption)
-                .opacity(0.4)
-            Text("Business")
-                .font(.title2)
-                .bold()
-            Capsule(style: .continuous)
-                .fill(Color.secondary)
-                .opacity(0.3)
-                .frame(width: 180, height: 3)
-                .overlay(
-                    HStack {
-                        Capsule(style: .continuous)
-                            .fill(Color("AccentColorPink"))
-                            .frame(width: 100)
-                            .shadow(color: Color("AccentColorPink").opacity(0.4), radius: 5)
-                        Spacer()
-                    }
-                )
-                .padding(.top)
-        }
-        .frame(maxHeight: 80)
-        .padding()
-        .padding(.vertical, 5)
-        .background(Color("Cell"))
-        .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
-    }
-}
-
-struct RowView: View {
-    var label: String
-    var done: Bool
-    var color: Color
-    var hour: String
-    var body: some View {
-        HStack(alignment: .center) {
-            Image(systemName: done ? "checkmark.circle" : "circle")
-                .foregroundColor(done ? Color.secondary : color)
-                .font(.title)
-            VStack(alignment: .leading) {
-                Text(label)
-                    .strikethrough(done ? true : false)
-                    .foregroundColor(done ? .secondary : .primary)
-                    .bold()
-                    .opacity(0.7)
-                Text(hour)
-                    .foregroundColor(.secondary)
-                    .font(.caption)
-            }
-            Spacer()
-        }
-        .padding()
-        .padding(.vertical, 3)
-        .background(Color("Cell"))
-        .clipShape(RoundedRectangle(cornerRadius: 30, style: .continuous))
-    }
-}
-
-struct OnScreenPlusButton: View {
-    var body: some View {
-        Image(systemName: "plus")
-            .font(.title)
-            .padding()
-            .background(Color("OnScreenButton"))
-            .foregroundColor(.white)
-            .clipShape(Circle())
     }
 }
 
