@@ -55,15 +55,14 @@ struct HomeView: View {
                             }
                         }
                         .listStyle(PlainListStyle())
-                        .padding(.bottom, 3)
                     } else {
                         VStack{
-                            Text("Whow! there is no task for today for this category.")
-                                .font(.system(.title))
+                            Text("There is no task for today for this category.")
+                                .font(.system(.title3))
                                 .multilineTextAlignment(.center)
-                                .opacity(0.4)
+                                .opacity(0.3)
                                 .padding(.horizontal, 70)
-                                .padding(.top, 20)
+                                .padding(.top, 60)
                             Spacer()
                         }
                     }
