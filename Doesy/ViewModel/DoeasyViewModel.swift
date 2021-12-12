@@ -32,6 +32,10 @@ class DoeasyViewModel: ObservableObject {
         }
     }
     
+    func deleteTask(_ indexSet: IndexSet) {
+        tasks.remove(atOffsets: indexSet)
+    }
+    
     func timeForRow(time: Date) -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "HH:MM a"
