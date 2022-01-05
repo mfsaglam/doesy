@@ -121,11 +121,19 @@
 			children = (
 				1246826F271B09F0002740BB /* HomeView.swift */,
 				12BF3BA227294D0B009DA38C /* NewTaskView.swift */,
+				12AF6284278614730048EC44 /* Components */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		12AF6284278614730048EC44 /* Components */ = {
+			isa = PBXGroup;
+			children = (
 				12E8C2A2276648AB0078DDE9 /* CategoryRowView.swift */,
 				12E8C29E276647700078DDE9 /* TaskRowView.swift */,
 				12E8C2A0276648630078DDE9 /* OnScreenPlusButton.swift */,
 			);
-			path = View;
+			path = Components;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
