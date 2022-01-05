@@ -89,7 +89,7 @@ struct NewTaskView: View {
                     OnScreenNewTaskButton()
                         .shadow(color: Color("OnScreenButton").opacity(0.2), radius: 10, x: 0, y: 20)
                         .onTapGesture {
-                            let newTask = Task(title: taskTitle, color: color.description, time: date)
+                            let newTask = Task(title: taskTitle, color: UIColor(color).toHex ?? "", time: date)
                             viewModel.addNewTask(newTask)
                             presentationMode.wrappedValue.dismiss()
                         }
