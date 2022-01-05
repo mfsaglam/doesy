@@ -6,21 +6,31 @@
 //
 
 import SwiftUI
+import RealmSwift
 
 class DoeasyViewModel: ObservableObject {
     
     @Published var tasks: [Task<Color>] = []
+    @Published var categories: [Category<Color>] = []
     
     init() {
         loadTasks()
     }
     
     func loadTasks() {
-        tasks.append(contentsOf: [Task(title: "Meeting with team", color: Color("AccentColorBlue")),
-                                  Task(title: "Drink some coffee", done: true, color: Color("AccentColorBlue")),
-                                  Task(title: "Create new 3D drawing for new cients", color: Color("AccentColorBlue")),
-                                  Task(title: "Go to grocery and buy some milk", color: Color("AccentColorPink"))
-                                 ]
+        tasks.append(contentsOf: [
+            Task(title: "Meeting with team", color: Color("AccentColorBlue")),
+            Task(title: "Drink some coffee", done: true, color: Color("AccentColorBlue")),
+            Task(title: "Create new 3D drawing for new cients", color: Color("AccentColorBlue")),
+            Task(title: "Go to grocery and buy some milk", color: Color("AccentColorPink"))
+        ]
+        )
+    }
+    
+    func loadCategories() {
+        categories.append(contentsOf: [
+            
+        ]
         )
     }
     

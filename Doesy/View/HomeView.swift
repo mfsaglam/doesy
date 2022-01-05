@@ -21,12 +21,13 @@ struct HomeView: View {
                         .font(.system(.footnote))
                         .opacity(0.4)
                         .padding(.leading)
-                        .padding(.top, 35)
+                        //.padding(.top, 35)
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 10) {
                             ForEach(0 ..< 5) { item in
                                 CategoryRowView(viewModel: viewModel)
-                                    .shadow(color: .black.opacity(0.03), radius: 8, x: 0, y: 4)
+                                    .shadow(color: .black.opacity(0.5), radius: 8, x: 0, y: 7)
+                                    .padding(.vertical, 20)
                             }
                         }
                         .padding(.leading)
@@ -41,7 +42,6 @@ struct HomeView: View {
                         List {
                             ForEach(viewModel.tasks) { item in
                                 TaskRowView(label: item.title, done: item.done, color: item.color, hour: viewModel.timeForRow(time: item.time))
-                                    .shadow(color: .black.opacity(0.03), radius: 8, x: 0, y: 4)
                                     .listRowBackground(Color.clear)
                                     .listRowSeparator(.hidden)
                                     .onTapGesture {
