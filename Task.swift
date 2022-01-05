@@ -6,11 +6,12 @@
 //
 
 import Foundation
+import RealmSwift
 
-struct Task: Identifiable {
+class Task: Object, Identifiable {
     var id = UUID()
-    var title: String
+    var title: String = ""
     var done: Bool = false
-    var color: String
+    var color: String = ""
     var time: Date = Date.now
 }

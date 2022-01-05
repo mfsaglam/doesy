@@ -6,10 +6,12 @@
 //
 
 import Foundation
+import RealmSwift
 
-struct Category: Identifiable {
-    var id = UUID()
-    var title: String
-    var percentage: Double = 0
-    var color: String
+class Category: Object, Identifiable  {
+    @objc dynamic var id = UUID()
+    @objc dynamic var title: String = ""
+    @objc dynamic var percentage: Double = 0
+    @objc dynamic var color: String = ""
+    @objc dynamic var tasks: [Task] = [Task]()
 }

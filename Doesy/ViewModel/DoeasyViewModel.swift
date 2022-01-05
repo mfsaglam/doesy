@@ -19,10 +19,6 @@ class DoeasyViewModel: ObservableObject {
     
     func loadTasks() {
         tasks.append(contentsOf: [
-            Task(title: "Meeting with team", color: "1B74EC"),
-            Task(title: "Drink some coffee", done: true, color: "1B74EC"),
-            Task(title: "Create new 3D drawing for new cients", color: "1B74EC"),
-            Task(title: "Go to grocery and buy some milk", color: "1B74EC")
         ]
         )
     }
