@@ -26,7 +26,7 @@ struct HomeView: View {
                         HStack(spacing: 10) {
                             ForEach(0 ..< 5) { item in
                                 CategoryRowView(viewModel: viewModel)
-                                    .shadow(color: .black.opacity(0.5), radius: 8, x: 0, y: 7)
+                                    .shadow(color: .black.opacity(0.17), radius: 8, x: 0, y: 7)
                                     .padding(.vertical, 20)
                             }
                         }
