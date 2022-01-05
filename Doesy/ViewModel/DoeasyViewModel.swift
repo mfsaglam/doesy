@@ -10,8 +10,8 @@ import RealmSwift
 
 class DoeasyViewModel: ObservableObject {
     
-    @Published var tasks: [Task<Color>] = []
-    @Published var categories: [Category<Color>] = []
+    @Published var tasks: [Task] = []
+    @Published var categories: [Category] = []
     
     init() {
         loadTasks()
@@ -19,10 +19,10 @@ class DoeasyViewModel: ObservableObject {
     
     func loadTasks() {
         tasks.append(contentsOf: [
-            Task(title: "Meeting with team", color: Color("AccentColorBlue")),
-            Task(title: "Drink some coffee", done: true, color: Color("AccentColorBlue")),
-            Task(title: "Create new 3D drawing for new cients", color: Color("AccentColorBlue")),
-            Task(title: "Go to grocery and buy some milk", color: Color("AccentColorPink"))
+            Task(title: "Meeting with team", color: "1B74EC"),
+            Task(title: "Drink some coffee", done: true, color: "1B74EC"),
+            Task(title: "Create new 3D drawing for new cients", color: "1B74EC"),
+            Task(title: "Go to grocery and buy some milk", color: "1B74EC")
         ]
         )
     }
@@ -52,7 +52,7 @@ class DoeasyViewModel: ObservableObject {
         return formatter.string(from: time)
     }
     
-    func addNewTask(_ task: Task<Color>) {
+    func addNewTask(_ task: Task) {
         tasks.append(task)
     }
 }

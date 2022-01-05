@@ -41,7 +41,7 @@ struct HomeView: View {
                     if viewModel.tasks.count != 0 {
                         List {
                             ForEach(viewModel.tasks) { item in
-                                TaskRowView(label: item.title, done: item.done, color: item.color, hour: viewModel.timeForRow(time: item.time))
+                                TaskRowView(label: item.title, done: item.done, color: Color(hex: item.color), hour: viewModel.timeForRow(time: item.time))
                                     .listRowBackground(Color.clear)
                                     .listRowSeparator(.hidden)
                                     .onTapGesture {

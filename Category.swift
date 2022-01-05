@@ -7,9 +7,9 @@
 
 import Foundation
 
-struct Category<CategoryColor>: Identifiable {
+struct Category: Identifiable {
     var id = UUID()
     var title: String
     var percentage: Double = 0
-    var color: CategoryColor
+    var color: String
 }

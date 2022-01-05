@@ -89,7 +89,7 @@ struct NewTaskView: View {
                     OnScreenNewTaskButton()
                         .shadow(color: Color("OnScreenButton").opacity(0.2), radius: 10, x: 0, y: 20)
                         .onTapGesture {
-                            let newTask = Task(title: taskTitle, color: Color("OnScreenButton"), time: date)
+                            let newTask = Task(title: taskTitle, color: color.description, time: date)
                             viewModel.addNewTask(newTask)
                             presentationMode.wrappedValue.dismiss()
                         }
@@ -112,30 +112,4 @@ struct NewTaskView_Previews: PreviewProvider {
     }
 }
 
-struct CircularDismissButton: View {
-    var body: some View {
-        Image(systemName: "xmark")
-            .font(.title3)
-            .padding()
-            .background(
-                Circle()
-                    .stroke(lineWidth: 2)
-                    .opacity(0.1)
-            )
-            .padding(.trailing, 40)
-    }
-}
 
-struct OnScreenNewTaskButton: View {
-    var body: some View {
-        HStack {
-            Text("New task")
-            Image(systemName: "chevron.up")
-        }
-        .padding()
-        .padding(.horizontal, 20)
-        .foregroundColor(.white)
-        .background(Color("OnScreenButton"))
-        .clipShape(RoundedRectangle(cornerRadius: 30, style: .continuous))
-    }
-}
