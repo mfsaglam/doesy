@@ -14,6 +14,8 @@ struct NewTaskView: View {
     @State var date: Date = .now
     @State var shouldShowDatePicker = false
     @State var shouldShowTitleAlert = false
+    
+    @State var isCategory: Bool = false
         
     @EnvironmentObject var viewModel: DoeasyViewModel
     @Environment(\.presentationMode) var presentationMode
@@ -23,26 +25,29 @@ struct NewTaskView: View {
             Color("Background")
                 .ignoresSafeArea()
             VStack(alignment: .leading) {
-                TextField(viewModel.categories.isEmpty ? "Enter new category" : "Enter new task", text: viewModel.categories.isEmpty ? $categoryTitle : $taskTitle)
+                TextField(isCategory ? "Enter new category" : "Enter new task", text: isCategory ? $categoryTitle : $taskTitle)
                     .font(.title)
                     .padding()
                 HStack {
-                    HStack {
-                        Image(systemName: "calendar")
-                        Text("Today")
-                    }
-                    .font(.title3)
-                    .opacity(0.6)
-                    .padding()
-                    .padding(.horizontal)
-                    .background(
-                        RoundedRectangle(cornerRadius: 30, style: .continuous)
-                            .stroke(lineWidth: 2)
-                            .opacity(0.1)
-                    )
-                    .onTapGesture {
-                        withAnimation(.interactiveSpring()) {
-                            shouldShowDatePicker.toggle()
+                    if !isCategory {
+                        HStack {
+                            Image(systemName: "calendar")
+                            //TODO: - Format the date
+                            Text("\(date)")
+                        }
+                        .font(.title3)
+                        .opacity(0.6)
+                        .padding()
+                        .padding(.horizontal)
+                        .background(
+                            RoundedRectangle(cornerRadius: 30, style: .continuous)
+                                .stroke(lineWidth: 2)
+                                .opacity(0.1)
+                        )
+                        .onTapGesture {
+                            withAnimation(.interactiveSpring()) {
+                                shouldShowDatePicker.toggle()
+                            }
                         }
                     }
                     ColorPicker("", selection: $color)
@@ -63,7 +68,19 @@ struct NewTaskView: View {
                 
                 HStack(spacing: 50) {
                     Spacer()
-                    Image(systemName: "folder.badge.plus")
+                    if isCategory {
+                        Image(systemName: "folder.badge.plus")
+                            .renderingMode(.original)
+                            .foregroundColor(Color("OnScreenButton"))
+                            .onTapGesture {
+                                isCategory.toggle()
+                            }
+                    } else {
+                        Image(systemName: "folder.badge.plus")
+                            .onTapGesture {
+                                isCategory.toggle()
+                            }
+                    }
                     Image(systemName: "flag")
                     Image(systemName: "moon")
                     Spacer()
@@ -107,6 +124,11 @@ struct NewTaskView: View {
             }
         }
         .navigationBarHidden(true)
+        .onAppear {
+            if viewModel.categories.isEmpty {
+                isCategory = true
+            }
+        }
     }
 }
 
