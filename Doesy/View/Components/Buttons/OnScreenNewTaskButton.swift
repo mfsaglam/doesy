@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct OnScreenNewTaskButton: View {
+    var isTask: Bool
     var body: some View {
         HStack {
-            Text("New task")
+            Text(isTask ? "New task": "New category")
             Image(systemName: "chevron.up")
         }
         .padding()
@@ -23,7 +24,7 @@ struct OnScreenNewTaskButton: View {
 
 struct OnScreenNewTaskButton_Previews: PreviewProvider {
     static var previews: some View {
-        OnScreenNewTaskButton()
+        OnScreenNewTaskButton(isTask: false)
             .preferredColorScheme(.dark)
     }
 }

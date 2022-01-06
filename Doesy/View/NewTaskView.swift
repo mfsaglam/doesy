@@ -87,7 +87,7 @@ struct NewTaskView: View {
                 Spacer()
                 HStack {
                     Spacer()
-                    OnScreenNewTaskButton()
+                    OnScreenNewTaskButton(isTask: !viewModel.categories.isEmpty)
                         .shadow(color: Color("OnScreenButton").opacity(0.2), radius: 10, x: 0, y: 20)
                         .onTapGesture {
                             let newTask = Task()

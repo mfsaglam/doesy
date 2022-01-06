@@ -118,9 +118,9 @@
 		1264AFCD27876C2E00661E09 /* Buttons */ = {
 			isa = PBXGroup;
 			children = (
-				12AF628527861F300048EC44 /* OnScreenNewTaskButton.swift */,
 				12E8C2A0276648630078DDE9 /* OnScreenPlusButton.swift */,
 				12AF628727861F7E0048EC44 /* CircularDismissButton.swift */,
+				12AF628527861F300048EC44 /* OnScreenNewTaskButton.swift */,
 			);
 			path = Buttons;
 			sourceTree = "<group>";
@@ -156,10 +156,10 @@
 		12AF6284278614730048EC44 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				1264AFD027876D2C00661E09 /* HomeViewContent.swift */,
 				1264AFCE27876C5900661E09 /* CategoriesAndTasks.swift */,
 				1264AFCC27876C2400661E09 /* Cells */,
 				1264AFCD27876C2E00661E09 /* Buttons */,
-				1264AFD027876D2C00661E09 /* HomeViewContent.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
