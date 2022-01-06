@@ -9,6 +9,7 @@ import SwiftUI
 
 struct NewTaskView: View {
     @State var taskTitle = ""
+    @State var categoryTitle = ""
     @State var color = Color.red
     @State var showDatePicker = false
     @State var date: Date = .now
@@ -23,7 +24,7 @@ struct NewTaskView: View {
             Color("Background")
                 .ignoresSafeArea()
             VStack(alignment: .leading) {
-                TextField("Enter new task", text: $taskTitle)
+                TextField(viewModel.categories.isEmpty ? "Enter new category" : "Enter new task", text: viewModel.categories.isEmpty ? $categoryTitle : $taskTitle)
                     .font(.title)
                     .padding()
                     .focused($isFocused)
