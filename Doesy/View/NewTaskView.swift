@@ -11,11 +11,10 @@ struct NewTaskView: View {
     @State var taskTitle = ""
     @State var categoryTitle = ""
     @State var color = Color.red
-    @State var showDatePicker = false
     @State var date: Date = .now
-    
-    @FocusState var isFocused: Bool
-    
+    @State var shouldShowDatePicker = false
+    @State var shouldShowTitleAlert = false
+        
     @EnvironmentObject var viewModel: DoeasyViewModel
     @Environment(\.presentationMode) var presentationMode
     
@@ -27,7 +26,6 @@ struct NewTaskView: View {
                 TextField(viewModel.categories.isEmpty ? "Enter new category" : "Enter new task", text: viewModel.categories.isEmpty ? $categoryTitle : $taskTitle)
                     .font(.title)
                     .padding()
-                    .focused($isFocused)
                 HStack {
                     HStack {
                         Image(systemName: "calendar")
@@ -44,7 +42,7 @@ struct NewTaskView: View {
                     )
                     .onTapGesture {
                         withAnimation(.interactiveSpring()) {
-                            showDatePicker.toggle()
+                            shouldShowDatePicker.toggle()
                         }
                     }
                     ColorPicker("", selection: $color)
@@ -58,7 +56,7 @@ struct NewTaskView: View {
                         .offset(x: -55)
                 }
                 
-                if showDatePicker {
+                if shouldShowDatePicker {
                     DatePicker(selection: $date, label: { Text("Date") })
                         .datePickerStyle(GraphicalDatePickerStyle())
                 }
@@ -90,29 +88,25 @@ struct NewTaskView: View {
                     OnScreenNewTaskButton(isTask: !viewModel.categories.isEmpty)
                         .shadow(color: Color("OnScreenButton").opacity(0.2), radius: 10, x: 0, y: 20)
                         .onTapGesture {
-                            let newTask = Task()
-                            newTask.title = taskTitle
-                            newTask.color = UIColor(color).toHex ?? ""
-                            newTask.time = date
-                            viewModel.addNewTask(newTask)
-                            presentationMode.wrappedValue.dismiss()
+                            if taskTitle.count == 0 {
+                                shouldShowTitleAlert = true
+                            } else {
+                                let newTask = Task()
+                                newTask.title = taskTitle
+                                newTask.color = UIColor(color).toHex ?? ""
+                                newTask.time = date
+                                viewModel.addNewTask(newTask)
+                                presentationMode.wrappedValue.dismiss()
+                            }
                         }
+                        .alert("Please enter a text.", isPresented: $shouldShowTitleAlert) {
+                                    Button("OK", role: .cancel) { }
+                                }
                 }
                 .padding(.trailing, 40)
             }
         }
         .navigationBarHidden(true)
-        .onAppear {
-            isFocused = true
-        }
-    }
-}
-
-struct NewTaskView_Previews: PreviewProvider {
-    static var previews: some View {
-        NewTaskView()
-            .preferredColorScheme(.dark)
-        NewTaskView()
     }
 }
 
