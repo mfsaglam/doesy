@@ -14,6 +14,7 @@ struct HomeViewContent: View {
             Color("Background")
                 .ignoresSafeArea()
             
+        //MARK: - CATEGORIES AND TASKS
             if !viewModel.categories.isEmpty {
                 CategoriesAndTasks(viewModel: viewModel)
             } else {
@@ -33,6 +34,7 @@ struct HomeViewContent: View {
                 }
             }
             
+        //MARK: - PLUS BUTTON
             HStack {
                 Spacer()
                 VStack {
@@ -45,6 +47,8 @@ struct HomeViewContent: View {
                 .padding(.trailing)
             }
         }
+        
+        //MARK: - TOOLBAR
         .navigationTitle("What's up, Joy!")
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {

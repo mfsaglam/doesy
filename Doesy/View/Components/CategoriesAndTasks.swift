@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct CategoriesAndTasks: View {
+    
     var viewModel: DoeasyViewModel
+    
     var body: some View {
         VStack(alignment: .leading) {
             Text("CATEGORIES")

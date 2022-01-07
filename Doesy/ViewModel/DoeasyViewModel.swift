@@ -14,20 +14,20 @@ class DoeasyViewModel: ObservableObject {
     @Published var categories: [Category] = []
     
     init() {
-        loadTasks()
+        
     }
     
     func loadTasks() {
-        tasks.append(contentsOf: [
-        ]
-        )
+//        tasks.append(contentsOf: [
+//        ]
+//        )
     }
     
     func loadCategories() {
-        categories.append(contentsOf: [
-            
-        ]
-        )
+//        categories.append(contentsOf: [
+//
+//        ]
+//        )
     }
     
     func updateTask(_ id: UUID) {
@@ -50,5 +50,9 @@ class DoeasyViewModel: ObservableObject {
     
     func addNewTask(_ task: Task) {
         tasks.append(task)
+    }
+    
+    func addNewCategory(_ category: Category) {
+        categories.append(category)
     }
 }

@@ -8,8 +8,7 @@
 import SwiftUI
 
 struct NewTaskView: View {
-    @State var taskTitle = ""
-    @State var categoryTitle = ""
+    @State var title = ""
     @State var color = Color.red
     @State var date: Date = .now
     @State var shouldShowDatePicker = false
@@ -25,7 +24,7 @@ struct NewTaskView: View {
             Color("Background")
                 .ignoresSafeArea()
             VStack(alignment: .leading) {
-                TextField(isCategory ? "Enter new category" : "Enter new task", text: isCategory ? $categoryTitle : $taskTitle)
+                TextField(isCategory ? "Enter new category" : "Enter new task", text: $title)
                     .font(.title)
                     .padding()
                 HStack {
@@ -105,14 +104,23 @@ struct NewTaskView: View {
                     OnScreenNewTaskButton(isTask: !viewModel.categories.isEmpty)
                         .shadow(color: Color("OnScreenButton").opacity(0.2), radius: 10, x: 0, y: 20)
                         .onTapGesture {
-                            if taskTitle.count == 0 {
+                            if title.count == 0 {
                                 shouldShowTitleAlert = true
                             } else {
-                                let newTask = Task()
-                                newTask.title = taskTitle
-                                newTask.color = UIColor(color).toHex ?? ""
-                                newTask.time = date
-                                viewModel.addNewTask(newTask)
+                                if isCategory {
+                                    let newCategory = Category()
+                                    newCategory.title = title
+                                    newCategory.color = UIColor(color).toHex ?? ""
+                                    viewModel.addNewCategory(newCategory)
+                                    print(viewModel.categories)
+                                } else {
+                                    let newTask = Task()
+                                    newTask.title = title
+                                    newTask.color = UIColor(color).toHex ?? ""
+                                    newTask.time = date
+                                    viewModel.addNewTask(newTask)
+                                    print(viewModel.tasks)
+                                }
                                 presentationMode.wrappedValue.dismiss()
                             }
                         }

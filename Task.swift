@@ -8,7 +8,7 @@
 import Foundation
 import RealmSwift
 
-class Task: Object, Identifiable {
+class Task: Identifiable {
     var id = UUID()
     var title: String = ""
     var done: Bool = false
