@@ -37,42 +37,45 @@ struct CategoriesAndTasks: View {
                     .font(.system(.footnote))
                     .opacity(0.4)
                     .padding(.leading)
-                .padding(.top, 25)
+                    .padding(.top, 25)
             }
             //MARK: - Crashes here, fix it
-            if viewModel.selectedCategory!.tasks.count != 0 {
-                List {
-                    ForEach(viewModel.selectedCategory!.tasks) { task in
-                        TaskRowView(task: task)
-                            .listRowBackground(Color.clear)
-                            .listRowSeparator(.hidden)
-                            .onTapGesture {
-                                withAnimation(.interactiveSpring()) {
-                                    viewModel.updateTask(category: viewModel.selectedCategory!, task.id)
+            if let category = viewModel.selectedCategory {
+                if category.tasks.count != 0 {
+                    List {
+                        ForEach(category.tasks) { task in
+                            TaskRowView(task: task)
+                                .listRowBackground(Color.clear)
+                                .listRowSeparator(.hidden)
+                                .onTapGesture {
+                                    withAnimation(.interactiveSpring()) {
+                                        viewModel.updateTask(category: category, task.id)
+                                    }
                                 }
-                            }
+                        }
+                        .onDelete { indexSet in
+                            viewModel.deleteTask(category: category, indexSet)
+                        }
                     }
-                    .onDelete { indexSet in
-                        viewModel.deleteTask(category: viewModel.selectedCategory!, indexSet)
+                    .listStyle(PlainListStyle())
+                } else {
+                    VStack{
+                        Spacer()
+                        Image(systemName: "scribble.variable")
+                            .font(.system(size: 40))
+                            .foregroundColor(Color.black)
+                            .opacity(0.3)
+                        Text("There is no task today for this category.")
+                            .font(.system(.title3))
+                            .multilineTextAlignment(.center)
+                            .opacity(0.3)
+                            .padding(.horizontal, 70)
+                            .padding(.top, 20)
+                        Spacer()
                     }
-                }
-                .listStyle(PlainListStyle())
-            } else {
-                VStack{
-                    Spacer()
-                    Image(systemName: "scribble.variable")
-                        .font(.system(size: 40))
-                        .foregroundColor(Color.black)
-                        .opacity(0.3)
-                    Text("There is no task today for this category.")
-                        .font(.system(.title3))
-                        .multilineTextAlignment(.center)
-                        .opacity(0.3)
-                        .padding(.horizontal, 70)
-                        .padding(.top, 20)
-                    Spacer()
                 }
             }
+            Spacer()
         }
     }
 }
