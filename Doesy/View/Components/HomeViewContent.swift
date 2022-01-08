@@ -8,31 +8,31 @@
 import SwiftUI
 
 struct HomeViewContent: View {
-    var viewModel: DoeasyViewModel
+    @EnvironmentObject var viewModel: DoeasyViewModel
     var body: some View {
         ZStack {
             Color("Background")
                 .ignoresSafeArea()
             
         //MARK: - CATEGORIES AND TASKS
-            if !viewModel.categories.isEmpty {
-                CategoriesAndTasks(viewModel: viewModel)
-            } else {
-                VStack {
-                    Spacer()
-                    Image(systemName: "scribble.variable")
-                        .foregroundColor(.primary)
-                        .opacity(0.3)
-                        .font(.system(size: 50))
-                    Text("The file is currently empty. \nStart by adding a category.")
-                        .font(.system(.title3))
-                        .multilineTextAlignment(.center)
-                        .opacity(0.3)
-                        .padding(.horizontal, 70)
-                        .padding(.top, 60)
-                    Spacer()
-                }
-            }
+//            if !viewModel.categories.isEmpty {
+                CategoriesAndTasks()
+//            } else {
+//                VStack {
+//                    Spacer()
+//                    Image(systemName: "scribble.variable")
+//                        .foregroundColor(.primary)
+//                        .opacity(0.3)
+//                        .font(.system(size: 50))
+//                    Text("The file is currently empty. \nStart by adding a category.")
+//                        .font(.system(.title3))
+//                        .multilineTextAlignment(.center)
+//                        .opacity(0.3)
+//                        .padding(.horizontal, 70)
+//                        .padding(.top, 60)
+//                    Spacer()
+//                }
+//            }
             
         //MARK: - PLUS BUTTON
             HStack {
@@ -70,6 +70,6 @@ struct HomeViewContent: View {
 
 struct HomeViewContent_Previews: PreviewProvider {
     static var previews: some View {
-        HomeViewContent(viewModel: DoeasyViewModel())
+        HomeViewContent()
     }
 }

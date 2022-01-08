@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CategoriesAndTasks: View {
     
-    var viewModel: DoeasyViewModel
+    @EnvironmentObject var viewModel: DoeasyViewModel
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -21,7 +21,7 @@ struct CategoriesAndTasks: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 10) {
                     ForEach(viewModel.categories) { category in
-                        CategoryRowView(viewModel: viewModel)
+                        CategoryRowView(title: category.title, color: category.color)
                             .shadow(color: .black.opacity(0.17), radius: 8, x: 0, y: 7)
                             .padding(.vertical, 20)
                     }
@@ -75,6 +75,6 @@ struct CategoriesAndTasks: View {
 
 struct CategoriesAndTask_Previews: PreviewProvider {
     static var previews: some View {
-        CategoriesAndTasks(viewModel: DoeasyViewModel())
+        CategoriesAndTasks()
     }
 }

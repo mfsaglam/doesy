@@ -9,14 +9,17 @@ import SwiftUI
 
 struct CategoryRowView: View {
     
-    @StateObject var viewModel: DoeasyViewModel
+    @EnvironmentObject var viewModel: DoeasyViewModel
+    
+    var title: String
+    var color: String
     
     var body: some View {
         VStack(alignment: .leading,spacing: 10) {
             Text("\(viewModel.tasks.count) tasks")
                 .font(.caption)
                 .opacity(0.4)
-            Text("Business")
+            Text(title)
                 .font(.title2)
                 .bold()
             Capsule(style: .continuous)
@@ -26,9 +29,9 @@ struct CategoryRowView: View {
                 .overlay(
                     HStack {
                         Capsule(style: .continuous)
-                            .fill(Color("AccentColorPink"))
+                            .fill(Color(hex: color))
                             .frame(width: 100)
-                            .shadow(color: Color("AccentColorPink").opacity(0.4), radius: 5)
+                            .shadow(color: Color(hex: color).opacity(0.4), radius: 5)
                         Spacer()
                     }
                 )
@@ -44,7 +47,7 @@ struct CategoryRowView: View {
 
 struct CategoryRowView_Previews: PreviewProvider {
     static var previews: some View {
-        CategoryRowView(viewModel: DoeasyViewModel())
+        CategoryRowView(title: "Business", color: "EB06FF")
             .preferredColorScheme(.dark)
     }
 }

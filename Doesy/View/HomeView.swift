@@ -13,7 +13,7 @@ struct HomeView: View {
     
     var body: some View {
         NavigationView {
-            HomeViewContent(viewModel: viewModel)
+            HomeViewContent()
         }
         .environmentObject(viewModel)
     }
