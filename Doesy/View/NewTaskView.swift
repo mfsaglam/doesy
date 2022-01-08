@@ -11,10 +11,12 @@ struct NewTaskView: View {
     @State var title = ""
     @State var color = Color.red
     @State var date: Date = .now
+    
     @State var shouldShowDatePicker = false
     @State var shouldShowTitleAlert = false
-    
     @State var isCategory: Bool = false
+    
+    var selectedCategory: Category?
         
     @EnvironmentObject var viewModel: DoeasyViewModel
     @Environment(\.presentationMode) var presentationMode
@@ -78,7 +80,9 @@ struct NewTaskView: View {
                     } else {
                         Image(systemName: "folder.badge.plus")
                             .onTapGesture {
-                                isCategory.toggle()
+                                if !viewModel.categories.isEmpty {
+                                    isCategory.toggle()
+                                }
                             }
                     }
                     Image(systemName: "flag")
@@ -113,14 +117,12 @@ struct NewTaskView: View {
                                     newCategory.title = title
                                     newCategory.color = UIColor(color).toHex ?? ""
                                     viewModel.addNewCategory(newCategory)
-                                    print(viewModel.categories)
-                                } else {
+                                } else if let category = selectedCategory {
                                     let newTask = Task()
                                     newTask.title = title
                                     newTask.color = UIColor(color).toHex ?? ""
                                     newTask.time = date
-                                    viewModel.addNewTask(newTask)
-                                    print(viewModel.tasks)
+                                    viewModel.addNewTask(category: category, newTask)
                                 }
                                 presentationMode.wrappedValue.dismiss()
                             }

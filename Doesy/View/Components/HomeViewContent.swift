@@ -9,6 +9,7 @@ import SwiftUI
 
 struct HomeViewContent: View {
     @EnvironmentObject var viewModel: DoeasyViewModel
+    
     var body: some View {
         ZStack {
             Color("Background")
@@ -39,7 +40,7 @@ struct HomeViewContent: View {
                 Spacer()
                 VStack {
                     Spacer()
-                    NavigationLink(destination: NewTaskView()) {
+                    NavigationLink(destination: NewTaskView(selectedCategory: viewModel.selectedCategory)) {
                         OnScreenPlusButton()
                             .shadow(color: Color("OnScreenButton").opacity(0.3), radius: 10, y: 10)
                     }

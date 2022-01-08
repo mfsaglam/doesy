@@ -8,22 +8,21 @@
 import SwiftUI
 
 struct TaskRowView: View {
-    var label: String
-    var done: Bool
-    var color: Color
-    var hour: String
+    
+    var task: Task
+    
     var body: some View {
         HStack(alignment: .center) {
-            Image(systemName: done ? "checkmark.circle" : "circle")
-                .foregroundColor(done ? Color.secondary : color)
+            Image(systemName: task.done ? "checkmark.circle" : "circle")
+                .foregroundColor(task.done ? Color.secondary : Color(hex: task.color))
                 .font(.title)
             VStack(alignment: .leading) {
-                Text(label)
-                    .strikethrough(done ? true : false)
-                    .foregroundColor(done ? .secondary : .primary)
+                Text(task.title)
+                    .strikethrough(task.done ? true : false)
+                    .foregroundColor(task.done ? .secondary : .primary)
                     .bold()
                     .opacity(0.7)
-                Text(hour)
+                Text("\(task.time)")
                     .foregroundColor(.secondary)
                     .font(.caption)
             }
@@ -36,9 +35,9 @@ struct TaskRowView: View {
     }
 }
 
-struct TaskRowView_Previews: PreviewProvider {
-    static var previews: some View {
-        TaskRowView(label: "Task", done: false, color: .green, hour: "13:03")
-            .preferredColorScheme(.dark)
-    }
-}
+//struct TaskRowView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        TaskRowView()
+//            .preferredColorScheme(.dark)
+//    }
+//}

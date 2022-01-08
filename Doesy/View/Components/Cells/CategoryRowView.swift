@@ -8,18 +8,15 @@
 import SwiftUI
 
 struct CategoryRowView: View {
-    
-    @EnvironmentObject var viewModel: DoeasyViewModel
-    
-    var title: String
-    var color: String
+        
+    var category: Category
     
     var body: some View {
         VStack(alignment: .leading,spacing: 10) {
-            Text("\(viewModel.tasks.count) tasks")
+            Text("\(category.tasks.count) tasks")
                 .font(.caption)
                 .opacity(0.4)
-            Text(title)
+            Text(category.title)
                 .font(.title2)
                 .bold()
             Capsule(style: .continuous)
@@ -29,9 +26,9 @@ struct CategoryRowView: View {
                 .overlay(
                     HStack {
                         Capsule(style: .continuous)
-                            .fill(Color(hex: color))
+                            .fill(Color(hex: category.color))
                             .frame(width: 100)
-                            .shadow(color: Color(hex: color).opacity(0.4), radius: 5)
+                            .shadow(color: Color(hex: category.color).opacity(0.4), radius: 5)
                         Spacer()
                     }
                 )
@@ -45,9 +42,9 @@ struct CategoryRowView: View {
     }
 }
 
-struct CategoryRowView_Previews: PreviewProvider {
-    static var previews: some View {
-        CategoryRowView(title: "Business", color: "EB06FF")
-            .preferredColorScheme(.dark)
-    }
-}
+//struct CategoryRowView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        CategoryRowView()
+//            .preferredColorScheme(.dark)
+//    }
+//}

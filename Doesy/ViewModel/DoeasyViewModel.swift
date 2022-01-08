@@ -10,27 +10,33 @@ import RealmSwift
 
 class DoeasyViewModel: ObservableObject {
     
-    @Published var tasks: [Task] = []
     @Published var categories: [Category] = []
+    @Published var selectedCategory: Category?
     
     init() {
-        
+        if !categories.isEmpty {
+            self.selectedCategory = categories.first!
+        }
+    }
+    
+    func updateSelectedCategory(_ newCategory: Category) {
+        selectedCategory = newCategory
     }
     
     func loadTasks() {}
     
     func loadCategories() {}
     
-    func updateTask(_ id: UUID) {
-        for index in tasks.indices {
-            if tasks[index].id == id {
-                tasks[index].done.toggle()
+    func updateTask(category: Category, _ id: UUID) {
+        for index in category.tasks.indices {
+            if category.tasks[index].id == id {
+                category.tasks[index].done.toggle()
             }
         }
     }
     
-    func deleteTask(_ indexSet: IndexSet) {
-        tasks.remove(atOffsets: indexSet)
+    func deleteTask(category: Category, _ indexSet: IndexSet) {
+        category.tasks.remove(atOffsets: indexSet)
     }
     
     func timeForRow(time: Date) -> String {
@@ -39,8 +45,8 @@ class DoeasyViewModel: ObservableObject {
         return formatter.string(from: time)
     }
     
-    func addNewTask(_ task: Task) {
-        tasks.append(task)
+    func addNewTask(category: Category, _ task: Task) {
+        category.tasks.append(task)
     }
     
     func addNewCategory(_ category: Category) {

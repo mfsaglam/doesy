@@ -21,9 +21,12 @@ struct CategoriesAndTasks: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 10) {
                     ForEach(viewModel.categories) { category in
-                        CategoryRowView(title: category.title, color: category.color)
+                        CategoryRowView(category: category)
                             .shadow(color: .black.opacity(0.17), radius: 8, x: 0, y: 7)
                             .padding(.vertical, 20)
+                            .onTapGesture {
+                                viewModel.updateSelectedCategory(category)
+                            }
                     }
                 }
                 .padding(.leading)
@@ -36,20 +39,21 @@ struct CategoriesAndTasks: View {
                     .padding(.leading)
                 .padding(.top, 25)
             }
-            if viewModel.tasks.count != 0 {
+            //MARK: - Crashes here, fix it
+            if viewModel.selectedCategory!.tasks.count != 0 {
                 List {
-                    ForEach(viewModel.tasks) { task in
-                        TaskRowView(label: task.title, done: task.done, color: Color(hex: task.color), hour: viewModel.timeForRow(time: task.time))
+                    ForEach(viewModel.selectedCategory!.tasks) { task in
+                        TaskRowView(task: task)
                             .listRowBackground(Color.clear)
                             .listRowSeparator(.hidden)
                             .onTapGesture {
                                 withAnimation(.interactiveSpring()) {
-                                    viewModel.updateTask(task.id)
+                                    viewModel.updateTask(category: viewModel.selectedCategory!, task.id)
                                 }
                             }
                     }
                     .onDelete { indexSet in
-                        viewModel.deleteTask(indexSet)
+                        viewModel.deleteTask(category: viewModel.selectedCategory!, indexSet)
                     }
                 }
                 .listStyle(PlainListStyle())
