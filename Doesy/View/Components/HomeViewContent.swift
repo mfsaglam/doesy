@@ -15,24 +15,24 @@ struct HomeViewContent: View {
                 .ignoresSafeArea()
             
         //MARK: - CATEGORIES AND TASKS
-//            if !viewModel.categories.isEmpty {
+            if !viewModel.categories.isEmpty {
                 CategoriesAndTasks()
-//            } else {
-//                VStack {
-//                    Spacer()
-//                    Image(systemName: "scribble.variable")
-//                        .foregroundColor(.primary)
-//                        .opacity(0.3)
-//                        .font(.system(size: 50))
-//                    Text("The file is currently empty. \nStart by adding a category.")
-//                        .font(.system(.title3))
-//                        .multilineTextAlignment(.center)
-//                        .opacity(0.3)
-//                        .padding(.horizontal, 70)
-//                        .padding(.top, 60)
-//                    Spacer()
-//                }
-//            }
+            } else {
+                VStack {
+                    Spacer()
+                    Image(systemName: "scribble.variable")
+                        .foregroundColor(.primary)
+                        .opacity(0.3)
+                        .font(.system(size: 50))
+                    Text("The file is currently empty. \nStart by adding a category.")
+                        .font(.system(.title3))
+                        .multilineTextAlignment(.center)
+                        .opacity(0.3)
+                        .padding(.horizontal, 70)
+                        .padding(.top, 60)
+                    Spacer()
+                }
+            }
             
         //MARK: - PLUS BUTTON
             HStack {
