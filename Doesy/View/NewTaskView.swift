@@ -32,7 +32,8 @@ struct NewTaskView: View {
                         HStack {
                             Image(systemName: "calendar")
                             //TODO: - Format the date
-                            Text("\(date)")
+                            Text("\(viewModel.timeForRow(time: date))")
+                                .lineLimit(1)
                         }
                         .font(.title3)
                         .opacity(0.6)

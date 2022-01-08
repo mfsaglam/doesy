@@ -17,18 +17,9 @@ class DoeasyViewModel: ObservableObject {
         
     }
     
-    func loadTasks() {
-//        tasks.append(contentsOf: [
-//        ]
-//        )
-    }
+    func loadTasks() {}
     
-    func loadCategories() {
-//        categories.append(contentsOf: [
-//
-//        ]
-//        )
-    }
+    func loadCategories() {}
     
     func updateTask(_ id: UUID) {
         for index in tasks.indices {
